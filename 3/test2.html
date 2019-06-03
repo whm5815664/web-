@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>简单验证</title>
+<style type="text/css">
+<!--
+.STYLE4 {font-size: 30px}
+-->
+</style>
+<script language="javascript">
+	function a()
+	{
+		var a=parseInt(document.getElementById("text").value);
+		if(a>=1&&a<=100)
+		    alert("你输入对了，谢谢!");
+		else
+		    alert("请输入一个 1 到 100 之间的数字");
+	}
+</script>
+
+</head>
+
+<body>
+<p class="STYLE4">简单验证</p>
+<hr>
+  
+提交一个 1 到 100 之间的数字：
+<input name="textfield" type="text" id="text"/>
+<form id="form1" name="form1" method="post" action="">
+  <label></label>
+  <p>
+    <label>
+    <input type="submit" name="Submit" value="提交" onclick="a()" />
+    </label>
+  </p>
+</form>
+</body>
+
+</html>

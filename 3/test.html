@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>星期</title>
+<style type="text/css">
+<!--
+.STYLE4 {font-size: 30px}
+-->
+</style>
+</head>
+<body>
+<script language="javascript">
+       var now=new Date();
+	   var day=now.getDay();
+	   var picture="";
+	   switch(day)
+	   {
+	      case 0:picture="images/0.jpg";day=7;break;
+		  case 1:picture="images/1.jpg";break;
+		  case 2:picture="images/2.jpg";break;
+		  case 3:picture="images/3.jpg";break;
+		  case 4:picture="images/4.jpg";break;
+		  case 5:picture="images/5.jpg";break;
+		  case 6:picture="images/6.jpg";break;
+	   }
+	  
+                   document.write("<p class=STYLE4>今天是星期"+day+"</p>");    
+                   document.write("<img src="+picture+" width=500 height=800 >");
+</script>
+</body>
+</html>
