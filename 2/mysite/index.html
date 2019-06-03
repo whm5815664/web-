@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>无标题文档</title>
+<style type="text/css">
+<!--
+.STYLE1 {
+	font-family: "宋体";
+	font-size: 50px;
+	color: #FF00FF;
+	font-weight: bold;
+}
+.STYLE2 {font-family: "Times New Roman", Times, serif}
+.STYLE3 {color: #0066FF}
+.STYLE4 {font-size: 14px}
+.STYLE9 {font-family: "宋体"; font-size: 50px; color: #990066; font-weight: bold; }
+.STYLE11 {font-family: "宋体"; font-size: 50px; color: #FFFFFF; font-weight: bold; }
+.STYLE15 {color: #990033}
+-->
+</style>
+<script language="JavaScript">
+  function aClock( ){
+      var now=new Date( );
+      var hour=now.getHours( );
+      var min=now.getMinutes( );
+      var sec=now.getSeconds( );
+      
+	  var timeStr=" "+hour;
+      timeStr+=((min<10)?":0":":")+min;
+      timeStr+=((sec<10)?":0":":")+sec;
+      timeStr+=(hour>=12)?" P.M.":" A.M.";
+      
+	  document.clockform.clocktext.value=timeStr;
+      clockId=setTimeout("aClock( )",1000);
+  }  
+</script>
+</head>
+
+<body onLoad="aClock()">
+<p align="center"><img src="images/主页.png" width="721" height="77" /></p>
+<form id="form1" name="clockform" method="post" action="">
+  <label>
+  <div align="center">
+    <input name="clocktext" type="text" size="15" />
+  </div>
+  </label>
+</form>
+<p align="right">最近更新时间：2019年5月15日 </p>
+<hr></p>
+<p>&nbsp;</p>
+<table width="837" border="0" align="center">
+  <tr>
+    <td width="378" height="183"><div align="left"><img src="images/英语园地.png" width="77" height="59" /><span class="STYLE11"><span class="STYLE15"><u>英语园地</u></span></span></div></td>
+    <td width="443"><p class="STYLE2"> 这里是我多年学习英语抄录下的各种英文文章，可供网友们作为阅读材料之用。主要包括各类英语教材中的文章，TDEFL、CRE、CMAT之类英文考试的参考文章，以及各种阅读材料中的文章。</p>    </td>
+  </tr>
+  <tr>
+    <td height="175"><div align="left"><img src="images/精彩文章.png" width="67" height="58" /><span class="STYLE9"><u>精彩文章</u></span></div></td>
+    <td><p>这里是我这些年精心收集和整理的各类文章文摘，包括以下类别：中国古典哲学、管理学、心理学、成功学等</p>    </td>
+  </tr>
+  <tr>
+    <td height="209"><div align="left"><img src="images/与我联系主页.png" width="57" height="53" /><span class="STYLE1"><u><a href="page1.html">与我联系</a></u></span></div></td>
+    <td>如果你想给版主写点什么、那么就在这里的表单填写一下吧</td>
+  </tr>
+</table>
+<p align="center"><img src="images/游戏乐园.png" width="621" height="79" /></p>
+<hr>
+</p> 
+<div align="center" class="STYLE3"><img src="images/Email.png" width="27" height="16" /><span class="STYLE4">Email联系</span></div>
+</body>
+</html>
