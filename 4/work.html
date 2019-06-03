@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>登录</title>
+<script language="javascript">
+function a()
+{
+	 var name=document.getElementById("name").value;
+	 var sex=document.getElementsByName("sex");  //id只针对一个特定的对象，多个时需要用getElementsByName
+	 var hobby=document.getElementsByName("checkbox[]");
+	 
+	 if(name=="") {alert("名字是必填的");}
+	 //判断单选框是否已选
+	 var bFlag = false;
+	 for (var i = 0; i < sex.length; i++) 
+	 {
+       if (sex[i].checked)
+	   {
+          bFlag = true;
+          break;
+       }
+     }
+	 if(bFlag == false) {alert("性别是必填的");}
+	  //判断多选框是否已选
+	 var bFlag = false;
+	  for (var i = 0; i < hobby.length; i++) 
+	 {
+       if (hobby[i].checked)
+	   {
+          bFlag = true;
+          break;
+       }
+     }
+	 if(bFlag == false) {alert("爱好是必填的");}
+	 
+	 
+}
+</script>
+</head>
+
+<body>
+<form id="form1" name="form1" method="post" action="work.php">
+  <label>
+  姓名：
+  <input name="name" type="text" id="name" />
+  </label> 
+  *必填字段
+  <p>性别：
+    <label>
+    <input type="radio" name="sex" value="男" id="sex"/>
+    男</label>
+    <label>
+    <input type="radio" name="sex" value="女" id="sex"/>
+    女</label>
+  *</p>
+  <p>爱好：
+    <label>
+    <input name="checkbox[]" type="checkbox" id="checkbox[]" value="听音乐" />
+    听音乐</label>
+    <label>
+    <input name="checkbox[]" type="checkbox" id="checkbox[]" value="看小说" />
+    看小说</label>
+    <label>
+    <input name="checkbox[]" type="checkbox" id="checkbox[]" value="网上冲浪" />
+    网上冲浪</label>
+  *</p>
+  <p>
+    <label>
+    <input type="submit" name="Submit" value="提交" onclick="a()"/>
+    </label>
+    <label>
+    <input type="reset" name="Submit2" value="重置" />
+    </label>
+  </p>
+</form>
+
+</body>
+</html>
