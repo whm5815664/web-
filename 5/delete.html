@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>删除操作</title>
+<style type="text/css">
+<!--
+.STYLE1 {
+	font-size: xx-large;
+	font-weight: bold;
+}
+.STYLE2 {font-size: large}
+-->
+</style>
+</head>
+
+<body>
+<div align="center" class="STYLE1">
+<p>数据库删除操作</p></div>
+  <p>&nbsp;</p>
+  <form action="delete.php" method="post" name="form2" id="form1">
+    <div align="center" class="STYLE2">删除记录:    
+      <label>
+      <input name="deletefield" type="text" id="deletefield" />
+      <br />
+      </label>
+      <p>
+        <label>
+        <input type="radio" name="mod" value="EmployeeID" />
+        EmployeeID</label>
+        <label>
+        <input type="radio" name="mod" value="sql" />
+        sql语句</label>
+      </p>
+      <p>
+        <label>
+        <input type="submit" name="Submit" value="删除" />
+        </label>
+      </p>
+    </div>
+  </form>
+  
+  
+  <p>&nbsp;</p>
+</div>
+</body>
+</html>
