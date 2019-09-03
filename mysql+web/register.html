@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+        
+        <title>注册(register)</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/supersized.css">
+        <link rel="stylesheet" href="css/style.css">
+		
+	<script type='text/javascript'> 
+	function check()
+	{			
+			var password1=document.getElementById("password1").value;
+			var password2=document.getElementById("password2").value;
+			var username=document.getElementById("username").value;
+			var truename=document.getElementById("truename").value;
+			var tel=document.getElementById("tel").value;
+			var address=document.getElementById("address").value;
+			
+			if(password1!=password2)
+			{
+				alert("密码不一样！");
+				return false;
+			}					 
+			if(username==""|| password==""||truename==""||tel==""||address=="")
+			{
+			     alert("任意信息不能为空，请重新填写！");
+                 return false;
+			}
+			
+			return true;
+			
+	}
+	</script>	
+
+    </head>
+
+<body>
+
+<div class="page-container">
+            <h1>注册(register)</h1>
+            <form action="register.php" method="post" onsubmit="return check()">
+                <input type="text" name="username" id="username"  placeholder="请输入您的账号！">
+				<input type="text" name="truename" id="truename" placeholder="请输入您的真实姓名！">
+                <input type="password" name="password1" id="password1" placeholder="请输入您的用户密码！">
+				<input type="password" name="password2" id="password2" placeholder="请再次输入您的用户密码！">
+				<input type="text" name="tel" id="tel" placeholder="请输入您的电话！">
+				<input type="text" name="address" id="address" placeholder="请输入您的地址！">
+                <br><br>
+                <button type="submit" class="submit_button">注册</button>
+                <div class="error"><span>+</span></div>
+            </form>
+			<br><br><br>
+           
+        </div>
+		
+</body>
+</html>
