@@ -1,0 +1,220 @@
+
+<!doctype html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+
+    <title>whm的api测试</title>
+
+	<link rel="stylesheet" type="text/css" href="../../css/font-awesome-4.7.0/css/font-awesome.min.css"/>	
+	<link rel="stylesheet" type="text/css" href="../../css/me.css">
+	<link rel="stylesheet" type="text/css" href="../../css/public.css">
+	<link rel="stylesheet" type="text/css" href="../../css/nav.css">
+    
+    
+    <link rel="stylesheet" href="https://cache.amap.com/lbs/static/main1119.css"/>
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.8&key=d86cca455e2dd1fa9e7f74c8d0f650e2"></script>
+    <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
+
+   
+
+</head>
+
+<body> 
+    <div id="map" style="width: 100%;height: 80%"></div>
+ 
+<br>
+<form action="" method="post" name="map">
+<table align="center">
+   <tr>
+      <td>所选位置：</td>
+      <td>经度:<input id="lng" type="text" size="10" readonly></td>
+      <td>纬度:<input id="lat" type="text" size="10" readonly></td>
+      <td>地址:<input id="address" type="text" size="40" readonly></td>
+   </tr>
+</table>
+</form>
+
+<footer id="nav">
+		<ul class="navlist">
+			<li><a href="map.html" class="active"><i class="fa fa-home fa-fw"></i><span>首页</span></a></li>
+			
+			<li><a href="userMain.php"> <i class="fa fa-user"></i><span>我的</span></a></li>
+			
+		</ul>
+</footer>
+
+</body>
+</html>
+
+
+
+
+
+<script type="text/javascript">
+
+    //地图加载
+    var map = new AMap.Map("map", {
+        resizeEnable: true,
+        zoom:10,   ////设置地图显示的缩放级别
+        zooms:[3,20]
+    });
+
+    //定位标注当前位置
+    map.plugin('AMap.Geolocation', function() 
+	{
+        geolocation = new AMap.Geolocation({
+	        enableHighAccuracy: true,//是否使用高精度定位，默认:true
+	        timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+	        maximumAge: 0, //定位结果缓存0毫秒，默认：0
+            convert: true, //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
+            showButton: true, //显示定位按钮，默认：true
+            showMarker: true, //定位成功后在定位到的位置显示点标记，默认：true
+            showCircle: true, //定位成功后用圆圈表示定位精度范围，默认：true
+            panToLocation: true, //定位成功后将定位到的位置作为地图中心点，默认：true
+	        buttonPosition:'LB',    //定位按钮的停靠位置  LB左下角、  RB右下角
+	        buttonOffset: new AMap.Pixel(10, 20), //定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+	        zoomToAccuracy: true,   //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+        });
+
+        
+       //地图加入定位标注控制
+        map.addControl(geolocation);
+        geolocation.getCurrentPosition();
+      	AMap.event.addListener(geolocation, 'complete', onComplete); //返回定位信息
+        AMap.event.addListener(geolocation, 'error', onError); //返回定位出错信息
+    });
+
+   
+    //解析定位结果
+    var city;
+    function onComplete(data) 
+	{
+        var str = [];
+        city = data.addressComponent.citycode;    //得到ip所在城市
+        str.push('定位结果：' + data.position);
+        str.push('定位类别：' + data.location_type);
+        if(data.accuracy)
+		{
+             str.push('精度：' + data.accuracy + ' 米');
+        }//如为IP精确定位结果则没有精度信息
+        str.push('是否经过偏移：' + (data.isConverted ? '是' : '否'));
+
+        
+
+        var lnglatXY = [data.position.getLng(), data.position.getLat()];//地图上所标点的坐标
+        AMap.service('AMap.Geocoder',function() {//回调函数
+
+            geocoder = new AMap.Geocoder({
+
+            });
+
+            geocoder.getAddress(lnglatXY, function (status, result) {
+
+                if (status === 'complete' && result.info === 'OK') {
+
+                    //获得了有效的地址信息:
+
+                    //即，result.regeocode.formattedAddress
+
+                    console.log(result.regeocode.formattedAddress);
+
+                    var address = result.regeocode.formattedAddress;
+
+                    str.push('详细地址：' + address);
+
+                    alert(str.join(' | '));
+
+                } else {
+
+                	alert(str.join(' | '));//获取地址失败
+
+                }
+
+            });
+
+        })
+
+       
+
+    }
+
+    //解析定位错误信息
+    function onError(data) 
+	{
+       alert('定位失败，原因：'+data.message);
+    }
+
+    
+
+    //为地图注册click事件获取鼠标点击出的经纬度坐标
+    var clickEventListener = map.on('click', function(e) 
+	{
+
+        var lng = e.lnglat.getLng();   //得到经度
+        var lat = e.lnglat.getLat();   //得到纬度
+
+        //将经纬度输出到text
+		document.getElementById('lng').value=lng;
+		document.getElementById('lat').value=lat
+        
+		var str = [];    //将经纬度放入数组
+        str.push(lng);
+        str.push(lat);
+		
+		
+		//根据坐标获取位置
+		AMap.service('AMap.Geocoder',function(){//回调函数
+            //实例化Geocoder
+            geocoder = new AMap.Geocoder({
+                result: ""//地址
+            });
+            var lnglatXY=[e.lnglat.getLng(), e.lnglat.getLat()];//地图上所标点的坐标
+            geocoder.getAddress(lnglatXY, function(status, result) {
+                if (status === 'complete' && result.info === 'OK') 
+				{
+                    //获得了有效的地址信息:
+                    var result = result.regeocode.formattedAddress;
+                }
+				else
+				{
+                    var city = '获取失败';  //获取地址失败    
+                }
+                document.getElementById("address").value=result;
+                console.log(result);
+            });
+        })
+        //
+       
+
+    	
+        
+		
+        var infoWindow = new AMap.InfoWindow({
+            autoMove: true,
+            offset: {x: 0, y: -30}
+        });
+
+        
+        var marker = new AMap.Marker({   //创建地图标注
+            position: str
+        });
+        
+        infoWindow.setContent("经度："+lng+"纬度"+lat);
+  	    infoWindow.open(map, marker.getPosition());
+
+    });
+
+    
+</script>
+
+
+
+    
